@@ -52,20 +52,69 @@
  */
 export function getItemNames(items) {
   // Your code here
+  if (!Array.isArray(items)) {
+    return [];
+  } else {
+    const names = items.map((item) => {
+      return item.name;
+    })
+
+    return names;
+  }
 }
 
 export function getAffordableItems(items, maxPrice) {
   // Your code here
+  if (!Array.isArray(items) || typeof maxPrice !== "number") {
+    return [];
+  } else {
+    const affordableItems = items.filter((item) => {
+      if (item.price <= maxPrice) {
+        return item;
+      }
+    })
+
+    return affordableItems;
+  }
 }
 
 export function calculateTotal(items) {
   // Your code here
+  if (!Array.isArray(items) || items.length <= 0) {
+    return 0;
+  } else {
+    const total = items.reduce((currentTotal, item) => {
+      return currentTotal + (item.price * item.qty);
+    }, 0)
+
+    return total;
+  }
 }
 
 export function sortByPrice(items, ascending) {
   // Your code here
+  if (!Array.isArray(items)) {
+    return [];
+  } else {
+    const sortedItems = [...items].sort((a, b) => {
+      return ascending ? a.price - b.price : b.price - a.price;
+    })
+
+    return sortedItems;
+  }
 }
 
 export function formatBill(items) {
   // Your code here
+  if (!Array.isArray(items) || items.length <= 0) {
+    return "";
+  } else {
+    const formateditems = items.map((item) => {
+      return `${item.name} x ${item.qty} = Rs.${item.price * item.qty}`;
+    })
+
+    const formatedBills = formateditems.join("\n");
+
+    return formatedBills;
+  }
 }
